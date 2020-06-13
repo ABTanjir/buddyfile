@@ -8,6 +8,17 @@ Author: ABTanjir
 Author URI: http://abtanjir.com
 */
 
+
+require_once(dirname( __FILE__ ) . '/buddy_rest.php');
+
+$is_wc_active = in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) );
+
+#if woocommerce is not  active user will redirected to homepage
+if(!$is_wc_active){
+    wp_redirect(get_home_url());
+}
+
+
 global $wpdb; 
 define('_buddy_table', $wpdb->prefix . 'buddy_files');
 define('_buddy_table_version', '1.0');
@@ -43,6 +54,10 @@ add_action('wp_enqueue_scripts','load_scripts');
 function load_scripts() {
     wp_enqueue_script( 'load_scripts', plugins_url( '/assets/scripts.js', __FILE__), array('jquery'));
     wp_enqueue_style('load_scripts');
+    // =-------------------------------=
+    wp_localize_script('load_scripts', 'uploader', [
+        'nonce' => wp_create_nonce('wp_rest'),
+    ]);
 }
 
 /**
@@ -63,4 +78,3 @@ function buddyfile_page_template( $page_template ){
     }
     return $page_template;
 }
-

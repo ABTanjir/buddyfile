@@ -23,7 +23,7 @@
             <div class="page-content">
                 
                 <div>
-                    <button id="filebuddy_uploader" data-upload="<?= plugins_url('buddyfile/uploader.php');?>" type="button" class="file_upload btn btn-primary">Upload File..</button>
+                    <button id="filebuddy_uploader" data-upload="<?= get_home_url()."/wp-json/v1/upload";?>" type="button" class="file_upload btn btn-primary">Upload File..</button>
                 </div>
                 <ul class="file_list">
                 <?php

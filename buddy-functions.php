@@ -3,7 +3,6 @@
 if (!class_exists('WooCommerce')){
     require ABSPATH . 'wp-content/plugins/woocommerce/woocommerce.php';
 }
-
 function purchased_products() {
  	global $wpdb;
 	$purchased_products_ids = $wpdb->get_col( $wpdb->prepare(
@@ -26,7 +25,7 @@ function purchased_products() {
 	return array_unique( $purchased_products_ids );
 }
 
-function buyer_by_product_id( $producrs ) {
+function buyer_by_product_id( $producrs = array() ) {
     global $wpdb;
 
     foreach ($producrs as $key => $product_id) {
